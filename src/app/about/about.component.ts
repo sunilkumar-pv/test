@@ -9,6 +9,8 @@ import { DataService } from '../data.service';
 export class AboutComponent {
   title = 'test';
   jsonData:  any;
+  selectAllButtonText: string = "Select All";
+
 
   filteredData: any[] = [];
   searchText: any;
@@ -32,15 +34,23 @@ export class AboutComponent {
     });
   }
  
-  toggleSelectAll(event: any) {
+
+  toggleSelectAll() {
     const checkboxes = document.getElementsByName('checkboxName');
+    const anyUnchecked = Array.from(checkboxes).some((checkbox) => !(checkbox as HTMLInputElement).checked);
+  
     for (let i = 0; i < checkboxes.length; i++) {
       const checkbox = checkboxes[i] as HTMLInputElement;
-      checkbox.checked = event.target.checked;
+      checkbox.checked = anyUnchecked;
     }
-    this.updateSelectedCheckboxes();
+  
+    this.updateSelectedCheckboxes(); 
+  
+    // Toggle the button text
+    this.selectAllButtonText = anyUnchecked ? "Deselect All" : "Select All";
   }
-
+  
+  
 
   toggleCheckbox(checkboxId: string) {
     this.updateSelectedCheckboxes();

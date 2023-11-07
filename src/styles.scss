@@ -3,3 +3,10 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 
+body{
+    margin: 2px;
+    width: 100vw;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

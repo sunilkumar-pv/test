@@ -1,0 +1,15 @@
+.column-container {
+    column-count: 3; /* Number of columns you want */
+    column-gap: 20px; /* Adjust the gap between columns as needed */
+    width: 100%; /* Ensure the container takes the full width */
+  
+    /* Optional styling for columns */
+    column-fill: balance; /* Distribute content evenly between columns */
+  }
+  
+  .column-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  

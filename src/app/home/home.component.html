@@ -1,0 +1,22 @@
+<p>home works!</p>
+<hr>
+<div class="row m-1">
+    <div class="col-11">
+        <input class="form-control" type="text" placeholder="Search any key"  
+        [(ngModel)]="searchText"
+        >  
+      <div>
+ 
+</div> 
+<br> 
+<button (click)="toggleAllCheckboxes()">{{ buttonText }}</button>
+<div class="column-container"> 
+    <ul class="column-list">
+      <li *ngFor="let item of jsonData | wildcardSearch: searchText">
+        <input type="checkbox" [id]="item.id" [value]="item.id" name="checkboxName" [(ngModel)]="item.selected" 
+        (change)="selectMultiOUN($event)">
+        <label class="m-1" [for]="item.id">{{ item.name }}</label>
+      </li>
+    </ul>
+  </div>
+  
