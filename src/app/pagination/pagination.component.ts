@@ -8,29 +8,35 @@ export class PaginationComponent {
   @Input() currentPage!: number;
   @Input() itemsPerPage!: number;
   @Input() totalItems!: number;
-  @Output() pageChange = new EventEmitter<number>();
 
-  get totalPages(): number {
+  @Output() pageChange: EventEmitter<number> = new EventEmitter();
+
+  getTotalPages(): number {
     return Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
-  // Generate an array of page numbers
-  get pages(): number[] {
-    return Array(this.totalPages).fill(0).map((_, index) => index + 1);
-  }
-
-  goToPage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.pageChange.emit(page);
+  nextPage(): void {
+    if (this.currentPage < this.getTotalPages()) {
+      this.pageChange.emit(this.currentPage + 1);
     }
   }
 
-  goToFirstPage(): void {
-    this.goToPage(1);
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.pageChange.emit(this.currentPage - 1);
+    }
   }
 
-  goToLastPage(): void {
-    this.goToPage(this.totalPages);
-  }
 
+  getPages(): number[] {
+    const totalPages = this.getTotalPages();
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+  
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.getTotalPages()) {
+      this.pageChange.emit(page);
+    }
+  }
+  
 }

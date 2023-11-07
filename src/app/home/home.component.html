@@ -1,22 +1,33 @@
-<p>home works!</p>
-<hr>
+<!-- <p>home works!</p> -->
 <div class="row m-1">
-    <div class="col-11">
-        <input class="form-control" type="text" placeholder="Search any key"  
-        [(ngModel)]="searchText"
-        >  
-      <div>
- 
-</div> 
-<br> 
-<button (click)="toggleAllCheckboxes()">{{ buttonText }}</button>
-<div class="column-container"> 
-    <ul class="column-list">
-      <li *ngFor="let item of jsonData | wildcardSearch: searchText">
-        <input type="checkbox" [id]="item.id" [value]="item.id" name="checkboxName" [(ngModel)]="item.selected" 
-        (change)="selectMultiOUN($event)">
-        <label class="m-1" [for]="item.id">{{ item.name }}</label>
-      </li>
-    </ul>
+  <div class="col-12">
+    <p>Selected : <br> {{ selectedCheckboxes }}</p>
+    <hr>
   </div>
-  
+</div>
+
+
+<input class="form-control" type="text" placeholder="Search any key" [(ngModel)]="searchText">
+<br>
+<div class="row m-1">
+  <div class="col-12">
+    <button class="btn btn-outline-primary mt-2" (click)="toggleSelectAll()"><b>{{ selectAllButtonText }}</b></button>
+  </div>
+  <hr>
+</div>
+
+<div class="pagination-container column-container"> 
+  <div class="column-list" *ngFor="let item of jsonData| wildcardSearch: searchText; let i = index"
+    [ngClass]="{'hidden': i < (currentPage - 1) * itemsPerPage || i >= currentPage * itemsPerPage}">
+
+    <input class="column-list s-blocks" type="checkbox" [id]="'checkbox_' + item.id" [value]="item.id"
+      name="checkboxName" (change)="toggleCheckbox(item.id)">
+    <label class="m-1 s-blocks" [for]="'checkbox_' + item.id">{{ item.name }}</label>
+  </div>
+</div>
+
+<app-pagination [currentPage]="currentPage" 
+[itemsPerPage]="itemsPerPage" 
+[totalItems]="jsonData?.length"
+(pageChange)="onPageChange($event)">
+</app-pagination>

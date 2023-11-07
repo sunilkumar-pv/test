@@ -12,4 +12,13 @@
     padding: 0;
     margin: 0;
   }
+ 
   
+  .s-blocks:hover{
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .hidden {
+    display: none;
+  }

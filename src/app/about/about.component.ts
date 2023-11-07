@@ -16,23 +16,14 @@ export class AboutComponent {
   searchText: any;
   selectedCheckboxes: string = "";
   selectAllChecked: boolean = false; // Track the state of the "Select All" checkbox
-
-  currentPage: number = 1;
-  itemsPerPage: number = 10; // Adjust this as per your preference
-
-  // Handle page change event from pagination component
-  onPageChange(page: number): void {
-    this.currentPage = page;
-  }
-
-
+ 
   constructor(private dataService: DataService){
     this.dataService.getOuNamesList().subscribe((res: any)=> {
       console.log(res);
       this.jsonData = res;
     });
   }
- 
+  
 
   toggleSelectAll() {
     const checkboxes = document.getElementsByName('checkboxName');
