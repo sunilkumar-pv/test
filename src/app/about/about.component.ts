@@ -26,7 +26,6 @@ export class AboutComponent {
   }
 
 
-
   constructor(private dataService: DataService){
     this.dataService.getOuNamesList().subscribe((res: any)=> {
       console.log(res);
@@ -82,4 +81,6 @@ export class AboutComponent {
     this.selectedCheckboxes = selectedNames.join(", ");
     console.log("selected", this.selectedCheckboxes); 
   }
+
+
 }

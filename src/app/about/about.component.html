@@ -7,6 +7,8 @@
   </div>    
 </div>
 <hr>
+
+ 
 <div class="row m-1">
   <div class="col-12">
       <input class="form-control" type="text" placeholder="Search any key"  [(ngModel)]="searchText">  
@@ -17,8 +19,8 @@
      <div class="column-container">
           <div class="column-list"
            *ngFor="let item of jsonData | wildcardSearch: searchText">
-            <input type="checkbox" [id]="'checkbox_' + item.id" [value]="item.id" name="checkboxName" (change)="toggleCheckbox(item.id)">
-            <label class="m-1" [for]="'checkbox_' + item.id">{{ item.name }}</label>
+            <input class=" s-blocks" type="checkbox" [id]="'checkbox_' + item.id" [value]="item.id" name="checkboxName" (change)="toggleCheckbox(item.id)">
+            <label class="m-1 s-blocks" [for]="'checkbox_' + item.id">{{ item.name }}</label>
             <br>   
           </div>
      </div>
