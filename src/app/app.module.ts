@@ -10,7 +10,8 @@ import { WildcardSearchPipe } from './wildcard-search.pipe';
 import { NoEmptyInputDirective } from './no-empty-input.directive';
 import { PaginationComponent } from './pagination/pagination.component';
 import { HomeComponent } from './home/home.component';
-
+import { CheckboxListComponent } from './checkbox-list/checkbox-list.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,8 @@ import { HomeComponent } from './home/home.component';
     NoEmptyInputDirective,
     PaginationComponent,
     HomeComponent,
+    CheckboxListComponent,
+    
   ],
   imports: [
     BrowserModule,

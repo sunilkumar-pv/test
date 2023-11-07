@@ -1,0 +1,35 @@
+ <!-- src/app/checkbox-list/checkbox-list.component.html -->
+<div class="row m-1">
+    <div class="col-12">
+      <p>Selected : <br> {{ selectedCheckboxes }}</p>
+      <hr>
+    </div>
+  </div>
+  
+  <input class="form-control" type="text" placeholder="Search any key" [(ngModel)]="searchText">
+  <br>
+  <div class="row m-1">
+    <div class="col-12">
+      <button class="btn btn-outline-primary mt-2" (click)="toggleSelectAll()"><b>{{ selectAllButtonText }}</b></button>
+    </div>
+    <hr>
+  </div>
+  
+  <div class="pagination-container column-container">
+    <div class="column-list" *ngFor="let item of jsonData | wildcardSearch: searchText as filteredData; let i = index"
+      [ngClass]="{'hidden': i < (currentPage - 1) * itemsPerPage || i >= currentPage * itemsPerPage}">
+  
+      <input class="column-list s-blocks" type="checkbox" [id]="'checkbox_' + item.id" [value]="item.id"
+        name="checkboxName" (change)="toggleCheckbox(item.id)">
+      <label class="m-1 s-blocks" [for]="'checkbox_' + item.id">{{ item.name }}</label>
+    </div>
+  </div>
+
+
+
+
+  <app-pagination [currentPage]="currentPage" 
+[itemsPerPage]="itemsPerPage" 
+[totalItems]="jsonData?.length"
+(pageChange)="onPageChange($event)">
+</app-pagination>
