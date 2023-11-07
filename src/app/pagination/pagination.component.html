@@ -1,0 +1,25 @@
+<div class="pagination">
+    <button (click)="goToFirstPage()">First Page</button>
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <ng-container *ngFor="let page of pages">
+      <button (click)="goToPage(page)" [class.active]="currentPage === page">{{ page }}</button>
+    </ng-container>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    <button (click)="goToLastPage()">Last Page</button>
+  </div>
+
+
+  <!-- <div class="pagination">
+    <button (click)="goToFirstPage()" class="btn btn-primary" [disabled]="currentPage === 1">First</button>
+    <button (click)="goToPage(currentPage - 1)" class="btn btn-primary" [disabled]="currentPage === 1">Previous</button>
+    <ng-container *ngFor="let page of pages">
+      <button
+        (click)="goToPage(page)"
+        class="btn btn-primary"
+        [class.active]="currentPage === page"
+      >{{ page }}</button>
+    </ng-container>
+    <button (click)="goToPage(currentPage + 1)" class="btn btn-primary" [disabled]="currentPage === totalPages">Next</button>
+    <button (click)="goToLastPage()" class="btn btn-primary" [disabled]="currentPage === totalPages">Last</button>
+  </div>
+   -->

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { WildcardSearchPipe } from './wildcard-search.pipe';
 import { NoEmptyInputDirective } from './no-empty-input.directive';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NoEmptyInputDirective } from './no-empty-input.directive';
     AboutComponent,
     WildcardSearchPipe,
     NoEmptyInputDirective,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

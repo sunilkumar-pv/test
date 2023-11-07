@@ -1,1 +1,47 @@
-<p>about works!</p>
+<h3>Test</h3>
+<hr>
+
+<div class="row m-1">
+  <div class="col-12"> 
+    <p>Selected : <br> {{ selectedCheckboxes }}</p> <hr>
+  </div>    
+</div>
+<hr>
+<div class="row m-1">
+  <div class="col-12">
+      <input class="form-control" type="text" placeholder="Search any key"  [(ngModel)]="searchText">  
+    <div>
+      <input type="checkbox" id="selectAll" [(ngModel)]="selectAllChecked" [ngModelOptions]="{standalone: true}"
+       (change)="toggleSelectAll($event)">
+      <label class="m-1" for="selectAll"> <b>Select All</b> </label>
+    </div> 
+    <hr>
+     <div class="column-container">
+          <div class="column-list"
+           *ngFor="let item of jsonData | wildcardSearch: searchText">
+            <input type="checkbox" [id]="'checkbox_' + item.id" [value]="item.id" name="checkboxName" (change)="toggleCheckbox(item.id)">
+            <label class="m-1" [for]="'checkbox_' + item.id">{{ item.name }}</label>
+            <br>   
+          </div>
+     </div>
+        <div *ngIf="jsonData | wildcardSearch: searchText as filteredData; else notFound">
+          <ng-container *ngFor="let item of filteredData">
+            <div *ngIf="item.id === 'not-found'">Search not found...</div>
+          </ng-container>
+        </div>
+        <ng-template #notFound ></ng-template>
+  </div>
+</div>
+
+<!-- *ngFor="let item of jsonData?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage) | wildcardSearch: searchText" -->
+  <!-- <div class="row m-1">
+  <div class="col-12">
+      Pagination Component  
+    <app-pagination
+      [currentPage]="currentPage"
+      [itemsPerPage]="itemsPerPage"
+      [totalItems]="jsonData?.length"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
+</div>  -->
