@@ -1,0 +1,29 @@
+<p>contact works!</p>
+<hr>
+  
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+
+    <div formArrayName="additionalCriterias">
+      <div *ngFor="let control of additionalCriteriasControls; let i = index">
+        <div [formGroup]="control">
+          <label>{{ control.value.key }}</label>
+          <input type="text" formControlName="value">
+          <button type="button" (click)="removeDropdownOption(i)">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <div>
+        <label>Select Dropdown:</label>
+        <select (change)="onDropdownChange($event)">
+          <option value=""></option>
+          <option value="abc">Abc</option>
+          <option value="pqr">Pqr</option>
+          <option value="xyz">Xyz</option>
+        </select>
+      </div>
+
+      <button type="submit">Submit</button>
+  </form>
+  
