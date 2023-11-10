@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { CheckboxListComponent } from './checkbox-list/checkbox-list.component';
 import { ContactComponent } from './contact/contact.component';
 import { CameraComponent } from './camera/camera.component';
+import { SuperTableComponent } from './super-table/super-table.component';
  
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CameraComponent } from './camera/camera.component';
     CheckboxListComponent,
     ContactComponent,
     CameraComponent,
+    SuperTableComponent,
     
   ],
   imports: [
