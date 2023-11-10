@@ -32,7 +32,7 @@ export class CameraComponent {
       });
       controls.push(control);
 
-      // Update the controls array after adding
+      // Update the controls array after addi ng
       this.additionalCriteriasControls = this.getAdditionalCriteriasControls();
     }
   }
