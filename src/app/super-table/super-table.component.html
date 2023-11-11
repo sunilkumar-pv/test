@@ -37,18 +37,18 @@
 
 
   <hr>
-  <label for="columnHeaders">columnHeaders</label>
-  <select name="" id="columnHeaders" (change)="doToggleForColumns($event)">
-    <option value="" disabled selected>Select</option>
-    <ng-container *ngFor="let col of columnHeaders; let i = index">
-      <option [value]="col">{{ col }}</option>
+  <label for="columnHeaders">columnHeaders</label> <br>
+  <select  name="" id="columnHeaders" (change)="doToggleForColumns($event)">
+    <option class="select-col" value="" disabled selected>Select</option>
+    <ng-container  *ngFor="let col of columnHeaders; let i = index" >
+      <option  value="{{ col }}" (click)="test(col, i)"> {{ i+1 }} - {{ col }}</option>
     </ng-container>
   </select>
   <hr>
   
 
 <table border="1.0">
-    <thead>
+    <thead style="background-color: azure;">
       <tr>
         <th>Sl No</th>
         <th>Product Code</th>
@@ -90,7 +90,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products; let i = index">
-        <td>{{ i }}</td>
+        <td>{{ i + 1 }}</td>
         <td>{{ product.productCode }}</td>
         <td>{{ product.productName }}</td>
         <td>{{ product.serialNumber }}</td>

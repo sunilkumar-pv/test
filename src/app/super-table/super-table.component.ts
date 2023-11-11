@@ -12,9 +12,12 @@ export class SuperTableComponent {
  
   selectedSortColumn: string = ''; // Added a variable to store the selected column for sorting
   selectedSortOrder: 'asc' | 'desc' = 'asc'; // Default sorting order
+  
   columnHeaders : any = [];
   columnVisibility: boolean[] = []; // New array to track column visibility
  
+  toggleMe: boolean = true;
+
   constructor(private dataService: DataService){
     this.dataService.getAllTableData().subscribe((res: any)=> {
       console.log(res);
@@ -22,10 +25,12 @@ export class SuperTableComponent {
       this.products = res;
 
       this.columnHeaders  = Object.keys(res[0]);  
+          // Initialize column visibility status to true for all columns
+          this.columnVisibility = Array(this.columnHeaders.length).fill(true);
     });
 
   }
-  
+ 
 
   doSort(event: any) {
     const selectedValue = (event.target as HTMLSelectElement).value;
@@ -68,10 +73,15 @@ export class SuperTableComponent {
   doToggleForColumns(val: any) {
     const selectedColumn = (val.target as HTMLSelectElement).value;
     console.log(selectedColumn);
+    if(selectedColumn === this.tableData?.price || selectedColumn === this.tableData?.rating){
+       this.toggleMe = false;
+    } 
   }
 
  
- 
+  test(col: any, i: any){
+    console.log(col, i);
+  }
 
 }
 
