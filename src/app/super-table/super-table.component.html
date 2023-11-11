@@ -1,1 +1,101 @@
 <p>super-table works!</p>
+<hr>
+
+<!-- your-component.component.html -->
+
+<!-- <table>
+    <thead>
+      <tr>
+        <th>
+          Stock/Quantity
+          <select [(ngModel)]="selectedStockQuantitySort">
+            <option value="stock">Stock</option>
+            <option value="quantity">Quantity</option>
+          </select>
+        </th>
+        <th>
+          Rating/Price
+          <select [(ngModel)]="selectedRatingPriceSort">
+            <option value="rating">Rating</option>
+            <option value="price">Price</option>
+          </select>
+        </th>
+        <th>Product Name</th>
+        <th>Category</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products | customSort: selectedStockQuantitySort; let i = index">
+        <td>{{ product.stock }} / {{ product.quantity }}</td>
+        <td>{{ product.rating }} / {{ product.price }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.category }}</td> 
+      </tr>
+    </tbody>
+  </table> -->
+  
+
+
+<!-- your-component.component.html -->
+
+<!-- super-table.component.html -->
+
+<table border="1.0">
+    <thead>
+      <tr>
+        <th>Sl No</th>
+        <th>Product Code</th>
+        <th>Product Name
+            <select name="" id="" (change)="doSort($event)">
+                <option value="" disabled selected>Select</option>
+                <option value="productName">Product Name - Asc</option>
+                <option value="productName-desc">Product Name - Desc</option> 
+            </select>
+        </th>
+        <th>Serial Number</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Type</th>
+        <th>Color</th>
+        <th>Q S
+            <select name="" id="" (change)="doSort($event)">
+                <option value="" disabled selected>Select</option>
+                <option value="quantity">Quantity - Asc</option>
+                <option value="quantity-desc">Quantity - Desc</option>
+                <option value="stock">Stock - Asc</option>
+                <option value="stock-desc">Stock - Desc</option>
+            </select>
+
+        </th>
+        <th>
+          P R
+          <select name="" id="" (change)="doSort($event)">
+            <option value="" disabled selected>Select</option>
+            <option value="price">Price - Asc</option>
+            <option value="price-desc">Price - Desc</option>
+            <option value="rating">Rating - Asc</option>
+            <option value="rating-desc">Rating - Desc</option>
+          </select>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let i = index">
+        <td>{{ i }}</td>
+        <td>{{ product.productCode }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.serialNumber }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.brand }}</td>
+        <td>{{ product.model }}</td>
+        <td>{{ product.type }}</td>
+        <td>{{ product.color }}</td>
+        <td>Quantity-{{ product.quantity }} <br> Stock-{{ product.stock }}</td>
+        <td>Price-{{ product.price }} <br> Rating-{{ product.rating }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

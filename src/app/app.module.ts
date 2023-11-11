@@ -14,6 +14,7 @@ import { CheckboxListComponent } from './checkbox-list/checkbox-list.component';
 import { ContactComponent } from './contact/contact.component';
 import { CameraComponent } from './camera/camera.component';
 import { SuperTableComponent } from './super-table/super-table.component';
+import { CustomSortPipe } from './custom-sort.pipe';
  
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SuperTableComponent } from './super-table/super-table.component';
     ContactComponent,
     CameraComponent,
     SuperTableComponent,
+    CustomSortPipe,
     
   ],
   imports: [
