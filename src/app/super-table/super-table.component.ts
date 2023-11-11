@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 
 @Component({
@@ -12,13 +12,18 @@ export class SuperTableComponent {
  
   selectedSortColumn: string = ''; // Added a variable to store the selected column for sorting
   selectedSortOrder: 'asc' | 'desc' = 'asc'; // Default sorting order
-
+  columnHeaders : any = [];
+  columnVisibility: boolean[] = []; // New array to track column visibility
+ 
   constructor(private dataService: DataService){
     this.dataService.getAllTableData().subscribe((res: any)=> {
       console.log(res);
       this.tableData = res;
       this.products = res;
+
+      this.columnHeaders  = Object.keys(res[0]);  
     });
+
   }
   
 
@@ -59,6 +64,13 @@ export class SuperTableComponent {
     }
   }
 
+
+  doToggleForColumns(val: any) {
+    const selectedColumn = (val.target as HTMLSelectElement).value;
+    console.log(selectedColumn);
+  }
+
+ 
  
 
 }
