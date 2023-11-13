@@ -6,3 +6,30 @@
 .hidden {
   display: none;
 }
+
+.lists{
+  display: flex;
+  cursor: pointer;
+  text-transform: capitalize;
+  list-style-type: none;
+  .lists-one{
+    flex-direction: row;
+    font-weight: bold;
+  }
+}
+
+ 
+// tr{
+//   th:nth-child(n+3) {
+//     background-color: lightgray;
+//     /* Add any other styles you want to apply to even th elements */
+//     scroll-behavior: smooth;
+//     overflow-x: scroll;
+//   }
+// }
+
+// th:not(:first-child):nth-child(n+3) {
+//   background-color: lightgray;
+//   overflow-x: scroll; 
+//   /* Add any other styles you want to apply to these th elements */
+// }

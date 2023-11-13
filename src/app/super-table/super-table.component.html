@@ -2,10 +2,11 @@
 
 <!-- (change)="doToggleForColumns($event)" -->
 
-<label for="columnHeaders">columnHeaders</label> <br>
-<ul name="" id="columnHeaders">
+<label for="columnHeaders">columnHeaders</label>
+ <br>
+<ul class="lists" name="" id="columnHeaders">
   <div *ngFor="let col of columnHeaders; let i = index" (click)="doToggleForColumns(col, i)">
-    <li>{{ i }} - {{ col }}</li>
+    <li class="lists-one">{{ i }} - {{ col }}</li>
   </div>
 </ul>
 <hr>
@@ -15,7 +16,7 @@
     <tr>
       <th>Sl No</th>
       <th *ngIf="columnVisibility[0]">Product Code</th>
-      <th *ngIf="columnVisibility[1]">Product Name
+      <th *ngIf="columnVisibility[1]">Product Name 
         <select name="" id="" (change)="doSort($event)">
           <option value="" disabled selected>Select</option>
           <option value="productName">Product Name - Asc</option>
@@ -29,7 +30,7 @@
       <th>Model</th>
       <th>Type</th>
       <th>Color</th>
-      <th>Q S
+      <th>Qty - Stock <br>
         <select name="" id="" (change)="doSort($event)">
           <option value="" disabled selected>Select</option>
           <option value="quantity">Quantity - Asc</option>
@@ -39,7 +40,7 @@
         </select>
 
       </th>
-      <th>P R
+      <th>Price - Ratings <br>
         <select name="" id="" (change)="doSort($event)">
           <option value="" disabled selected>Select</option>
           <option value="price">Price - Asc</option>
