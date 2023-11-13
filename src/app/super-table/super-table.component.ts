@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { DataService } from '../data.service';
   templateUrl: './super-table.component.html',
   styleUrls: ['./super-table.component.scss']
 })
-export class SuperTableComponent {
+export class SuperTableComponent implements OnInit{
   tableData: any;
   products: any;
  
@@ -16,8 +16,8 @@ export class SuperTableComponent {
   columnHeaders : any = [];
   columnVisibility: boolean[] = []; // New array to track column visibility
  
-  toggleMe: boolean = true;
-
+  currentPage: number = 1;
+  itemsPerPage: number = 4;
   constructor(private dataService: DataService){
     this.dataService.getAllTableData().subscribe((res: any)=> {
       console.log(res);
@@ -25,13 +25,14 @@ export class SuperTableComponent {
       this.products = res;
 
       this.columnHeaders  = Object.keys(res[0]);  
-          // Initialize column visibility status to true for all columns
-          this.columnVisibility = Array(this.columnHeaders.length).fill(true);
-    });
-
+     // Initialize column visibility status to true for all columns
+     this.columnVisibility = Array(this.columnHeaders.length).fill(true);
+    }); 
   }
- 
-
+  
+  ngOnInit(): void { 
+  }
+  
   doSort(event: any) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     // Now you have the selected value, extract the necessary information and perform the sorting
@@ -67,23 +68,22 @@ export class SuperTableComponent {
     } else {
       return '';
     }
-  }
-
-
-  doToggleForColumns(val: any) {
-    const selectedColumn = (val.target as HTMLSelectElement).value;
-    console.log(selectedColumn);
-    if(selectedColumn === this.tableData?.price || selectedColumn === this.tableData?.rating){
-       this.toggleMe = false;
-    } 
-  }
+  } 
+ 
+  doToggleForColumns(col: any, i: number) {
+    console.log(col, i);
+    // Toggle the visibility status of the selected column
+    this.columnVisibility[i] = !this.columnVisibility[i];
+  } 
 
  
-  test(col: any, i: any){
-    console.log(col, i);
+  onPageChange(newPage: number) {
+    this.currentPage = newPage;
   }
-
+  
 }
+
+
 
 
 

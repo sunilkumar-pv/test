@@ -1,109 +1,77 @@
 <p>super-table works!</p>
+
+<!-- (change)="doToggleForColumns($event)" -->
+
+<label for="columnHeaders">columnHeaders</label> <br>
+<ul name="" id="columnHeaders">
+  <div *ngFor="let col of columnHeaders; let i = index" (click)="doToggleForColumns(col, i)">
+    <li>{{ i }} - {{ col }}</li>
+  </div>
+</ul>
 <hr>
 
-<!-- your-component.component.html -->
-
-<!-- <table>
-    <thead>
-      <tr>
-        <th>
-          Stock/Quantity
-          <select [(ngModel)]="selectedStockQuantitySort">
-            <option value="stock">Stock</option>
-            <option value="quantity">Quantity</option>
-          </select>
-        </th>
-        <th>
-          Rating/Price
-          <select [(ngModel)]="selectedRatingPriceSort">
-            <option value="rating">Rating</option>
-            <option value="price">Price</option>
-          </select>
-        </th>
-        <th>Product Name</th>
-        <th>Category</th> 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products | customSort: selectedStockQuantitySort; let i = index">
-        <td>{{ product.stock }} / {{ product.quantity }}</td>
-        <td>{{ product.rating }} / {{ product.price }}</td>
-        <td>{{ product.productName }}</td>
-        <td>{{ product.category }}</td> 
-      </tr>
-    </tbody> (change)="doToggleForColumns($event)"
-  </table> -->
-  
-
-
-  <hr>
-  <label for="columnHeaders">columnHeaders</label> <br>
-  <select  name="" id="columnHeaders" (change)="doToggleForColumns($event)">
-    <option class="select-col" value="" disabled selected>Select</option>
-    <ng-container  *ngFor="let col of columnHeaders; let i = index" >
-      <option  value="{{ col }}" (click)="test(col, i)"> {{ i+1 }} - {{ col }}</option>
-    </ng-container>
-  </select>
-  <hr>
-  
-
 <table border="1.0">
-    <thead style="background-color: azure;">
-      <tr>
-        <th>Sl No</th>
-        <th>Product Code</th>
-        <th>Product Name
-            <select name="" id="" (change)="doSort($event)">
-                <option value="" disabled selected>Select</option>
-                <option value="productName">Product Name - Asc</option>
-                <option value="productName-desc">Product Name - Desc</option> 
-            </select>
-        </th>
-        <th>Serial Number</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Brand</th>
-        <th>Model</th>
-        <th>Type</th>
-        <th>Color</th>
-        <th>Q S
-            <select name="" id="" (change)="doSort($event)">
-                <option value="" disabled selected>Select</option>
-                <option value="quantity">Quantity - Asc</option>
-                <option value="quantity-desc">Quantity - Desc</option>
-                <option value="stock">Stock - Asc</option>
-                <option value="stock-desc">Stock - Desc</option>
-            </select>
+  <thead style="background-color: azure;">
+    <tr>
+      <th>Sl No</th>
+      <th *ngIf="columnVisibility[0]">Product Code</th>
+      <th *ngIf="columnVisibility[1]">Product Name
+        <select name="" id="" (change)="doSort($event)">
+          <option value="" disabled selected>Select</option>
+          <option value="productName">Product Name - Asc</option>
+          <option value="productName-desc">Product Name - Desc</option>
+        </select>
+      </th>
+      <th>Serial Number</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Type</th>
+      <th>Color</th>
+      <th>Q S
+        <select name="" id="" (change)="doSort($event)">
+          <option value="" disabled selected>Select</option>
+          <option value="quantity">Quantity - Asc</option>
+          <option value="quantity-desc">Quantity - Desc</option>
+          <option value="stock">Stock - Asc</option>
+          <option value="stock-desc">Stock - Desc</option>
+        </select>
 
-        </th>
-        <th>
-          P R
-          <select name="" id="" (change)="doSort($event)">
-            <option value="" disabled selected>Select</option>
-            <option value="price">Price - Asc</option>
-            <option value="price-desc">Price - Desc</option>
-            <option value="rating">Rating - Asc</option>
-            <option value="rating-desc">Rating - Desc</option>
-          </select>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ product.productCode }}</td>
-        <td>{{ product.productName }}</td>
-        <td>{{ product.serialNumber }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.brand }}</td>
-        <td>{{ product.model }}</td>
-        <td>{{ product.type }}</td>
-        <td>{{ product.color }}</td>
-        <td>Quantity-{{ product.quantity }} <br> Stock-{{ product.stock }}</td>
-        <td>Price-{{ product.price }} <br> Rating-{{ product.rating }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
+      </th>
+      <th>P R
+        <select name="" id="" (change)="doSort($event)">
+          <option value="" disabled selected>Select</option>
+          <option value="price">Price - Asc</option>
+          <option value="price-desc">Price - Desc</option>
+          <option value="rating">Rating - Asc</option>
+          <option value="rating-desc">Rating - Desc</option>
+        </select>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products; 
+    let i = index"
+    [ngClass]="{'hidden': i < (currentPage - 1) * itemsPerPage || i >= currentPage * itemsPerPage}">
+      <td>{{ i + 1 }}</td>
+      <td *ngIf="columnVisibility[0]">{{ product.productCode }}</td>
+      <td *ngIf="columnVisibility[1]">{{ product.productName }}</td>
+      <td>{{ product.serialNumber }}</td>
+      <td>{{ product.category }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.brand }}</td>
+      <td>{{ product.model }}</td>
+      <td>{{ product.type }}</td>
+      <td>{{ product.color }}</td>
+      <td>Quantity-{{ product.quantity }} <br> Stock-{{ product.stock }}</td>
+      <td>Price-{{ product.price }} <br> Rating-{{ product.rating }}</td>
+    </tr>
+  </tbody>
+</table>
 
+<app-pagination [currentPage]="currentPage" 
+[itemsPerPage]="itemsPerPage" 
+[totalItems]="products?.length"
+(pageChange)="onPageChange($event)">
+</app-pagination>

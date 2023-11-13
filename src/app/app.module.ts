@@ -28,8 +28,7 @@ import { CustomSortPipe } from './custom-sort.pipe';
     ContactComponent,
     CameraComponent,
     SuperTableComponent,
-    CustomSortPipe,
-    
+    CustomSortPipe,  
   ],
   imports: [
     BrowserModule,
