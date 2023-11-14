@@ -6,41 +6,70 @@ import { DataService } from '../data.service';
   templateUrl: './super-table.component.html',
   styleUrls: ['./super-table.component.scss']
 })
-export class SuperTableComponent implements OnInit{
+export class SuperTableComponent implements OnInit {
   tableData: any;
   products: any;
- 
+
   selectedSortColumn: string = ''; // Added a variable to store the selected column for sorting
   selectedSortOrder: 'asc' | 'desc' = 'asc'; // Default sorting order
-  
-  columnHeaders : any = [];
+
+  columnHeaders: any = [];
   columnVisibility: boolean[] = []; // New array to track column visibility
- 
+
   currentPage: number = 1;
   itemsPerPage: number = 4;
   selectedItemsPerPage: number[] = [4, 8, 12]; // Add this line
   selectedItemsPerPageValue: number = 4; // Add this line
 
-   searchText: string = ''; // Search input text
- 
+  searchText: string = ''; // Search input text
 
-  constructor(private dataService: DataService){
-    this.dataService.getAllTableData().subscribe((res: any)=> {
+
+  constructor(private dataService: DataService) {
+    this.dataService.getAllTableData().subscribe((res: any) => {
       console.log(res);
       this.tableData = res;
       this.products = res;
 
-      this.columnHeaders  = Object.keys(res[0]);  
-     // Initialize column visibility status to true for all columns
-     this.columnVisibility = Array(this.columnHeaders.length).fill(true);
-    }); 
+      this.columnHeaders = Object.keys(res[0]);
+      // Initialize column visibility status to true for all columns
+      this.columnVisibility = Array(this.columnHeaders.length).fill(true);
+    });
   }
-  
+
   ngOnInit(): void {
     this.itemsPerPage = this.selectedItemsPerPageValue;
   }
-  
-  
+
+  search(): void {
+    if (!this.searchText.trim()) {
+      // If the search text is empty, reset the products array to the original data
+      this.products = [...this.tableData];
+    } else {
+      // Perform case-insensitive search in each column of each row
+      this.products = this.tableData.filter((product: any) =>
+        Object.values(product).some((value: any) =>
+          this.valueContainsSearchText(value, this.searchText.toLowerCase())
+        )
+      );
+
+      if (this.products.length === 0) {
+        // If no results are found, you can display a message or handle it as needed
+        console.log('Not found');
+      }
+    }
+  }
+
+  private valueContainsSearchText(value: any, searchText: string): boolean {
+    if (typeof value === 'string') {
+      return value.toLowerCase().includes(searchText);
+    } else if (typeof value === 'number') {
+      return value.toString().includes(searchText);
+    } else {
+      return false;
+    }
+  }
+
+
 
 
   doSort(event: any) {
@@ -78,17 +107,17 @@ export class SuperTableComponent implements OnInit{
     } else {
       return '';
     }
-  } 
- 
+  }
+
   doToggleForColumns(col: any, i: number) {
     console.log(col, i);
     // Toggle the visibility status of the selected column
     this.columnVisibility[i] = !this.columnVisibility[i];
-  } 
+  }
 
 
 
- 
+
   onPageChange(newPage: number) {
     this.currentPage = newPage;
   }
@@ -99,7 +128,7 @@ export class SuperTableComponent implements OnInit{
 
 
 
-  
+
 }
 
 

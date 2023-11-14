@@ -2,7 +2,7 @@
 
 
 <label for="columnHeaders">columnHeaders</label>
- <br>
+<br>
 <ul class="lists" name="" id="columnHeaders">
   <div *ngFor="let col of columnHeaders; let i = index" (click)="doToggleForColumns(col, i)">
     <li class="lists-one">{{ i }} - {{ col }}</li>
@@ -12,79 +12,80 @@
 
 <!-- Search input -->
 <div class="search">
-  <input type="text" [(ngModel)]="searchText"   placeholder="Search any key here..">
+  <input type="text" [(ngModel)]="searchText" (input)="search()" placeholder="Search any key here..">
 </div>
 <hr>
 <hr>
 
-<div class="table-container"> 
-  
-    <table border="1.0">
-      <thead style="background-color: azure;">
-        <tr>
-          <th class="sticky-column">Sl <br> No</th>
-          <th class="sticky-column" *ngIf="columnVisibility[0]">Product <br> Code</th>
-          <th class="sticky-colu mn"  *ngIf="columnVisibility[1]">Product Name  <br>
-            <select name="" id="" (change)="doSort($event)">
-              <option value="" disabled selected>Select</option>
-              <option value="productName">Product Name - Asc</option>
-              <option value="productName-desc">Product Name - Desc</option>
-            </select>
-          </th>
-          <th>Serial <br> Number</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Brand</th>
-          <th>Model</th>
-          <th>Type</th>
-          <th>Color</th>
-          <th>Qty - Stock <br>
-            <select name="" id="" (change)="doSort($event)">
-              <option value="" disabled selected>Select</option>
-              <option value="quantity">Quantity - Asc</option>
-              <option value="quantity-desc">Quantity - Desc</option>
-              <option value="stock">Stock - Asc</option>
-              <option value="stock-desc">Stock - Desc</option>
-            </select>
-    
-          </th>
-          <th>Price - Ratings <br>
-            <select name="" id="" (change)="doSort($event)">
-              <option value="" disabled selected>Select</option>
-              <option value="price">Price - Asc</option>
-              <option value="price-desc">Price - Desc</option>
-              <option value="rating">Rating - Asc</option>
-              <option value="rating-desc">Rating - Desc</option>
-            </select>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products; 
-        let i = index"
-        [ngClass]="{'hidden': i < (currentPage - 1) * itemsPerPage || i >= currentPage * itemsPerPage}">
-  
-          <td class="sticky-column">  {{ i + 1 }}</td>
-          <td class="sticky-column"  *ngIf="columnVisibility[0]">{{ product.productCode }}</td>
-          <td class="sticky-colu mn"  *ngIf="columnVisibility[1]">{{ product.productName }}</td>
-          <td>{{ product.serialNumber }}</td>
-          <td>{{ product.category }}</td>
-          <td>{{ product.description }}</td>
-          <td>{{ product.brand }}</td>
-          <td>{{ product.model }}</td>
-          <td>{{ product.type }}</td>
-          <td>{{ product.color }}</td>
-          <td>Quantity-{{ product.quantity }} <br> Stock-{{ product.stock }}</td>
-          <td>Price-{{ product.price }} <br> Rating-{{ product.rating }}</td>
-       
-        </tr>
-      </tbody>
-    </table>
-  
-</div>
- 
+<div class="table-container">
 
- 
+  <table border="1.0">
+    <thead style="background-color: azure;">
+      <tr>
+        <th class="sticky-column">Sl <br> No</th>
+        <th class="sticky-column" *ngIf="columnVisibility[0]">Product <br> Code</th>
+        <th class="sticky-colu mn" *ngIf="columnVisibility[1]">Product Name <br>
+          <select name="" id="" (change)="doSort($event)">
+            <option value="" disabled selected>Select</option>
+            <option value="productName">Product Name - Asc</option>
+            <option value="productName-desc">Product Name - Desc</option>
+          </select>
+        </th>
+        <th>Serial <br> Number</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Type</th>
+        <th>Color</th>
+        <th>Qty - Stock <br>
+          <select name="" id="" (change)="doSort($event)">
+            <option value="" disabled selected>Select</option>
+            <option value="quantity">Quantity - Asc</option>
+            <option value="quantity-desc">Quantity - Desc</option>
+            <option value="stock">Stock - Asc</option>
+            <option value="stock-desc">Stock - Desc</option>
+          </select>
+
+        </th>
+        <th>Price - Ratings <br>
+          <select name="" id="" (change)="doSort($event)">
+            <option value="" disabled selected>Select</option>
+            <option value="price">Price - Asc</option>
+            <option value="price-desc">Price - Desc</option>
+            <option value="rating">Rating - Asc</option>
+            <option value="rating-desc">Rating - Desc</option>
+          </select>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; 
+        let i = index" [ngClass]="{'hidden': i < (currentPage - 1) * itemsPerPage || i >= currentPage * itemsPerPage}">
+
+        <td class="sticky-column"> {{ i + 1 }}</td>
+        <td class="sticky-column" *ngIf="columnVisibility[0]">{{ product.productCode }}</td>
+        <td class="sticky-colu mn" *ngIf="columnVisibility[1]">{{ product.productName }}</td>
+        <td>{{ product.serialNumber }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.brand }}</td>
+        <td>{{ product.model }}</td>
+        <td>{{ product.type }}</td>
+        <td>{{ product.color }}</td>
+        <td>Quantity-{{ product.quantity }} <br> Stock-{{ product.stock }}</td>
+        <td>Price-{{ product.price }} <br> Rating-{{ product.rating }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center mt-2" *ngIf="products?.length === 0">
+    <p>Search Not Found!</p>
+  </div>
+</div>
+
+
+
 
 
 <br>
@@ -94,18 +95,14 @@
 <div class="row">
   <div class="col-4">
     <label for="itemsPerPage">Items Per Page</label>
-    <select class="" name="" id="itemsPerPage" [(ngModel)]="selectedItemsPerPageValue" (change)="onItemsPerPageChange(selectedItemsPerPageValue)">
+    <select class="" name="" id="itemsPerPage" [(ngModel)]="selectedItemsPerPageValue"
+      (change)="onItemsPerPageChange(selectedItemsPerPageValue)">
       <option *ngFor="let items of selectedItemsPerPage" [value]="items">{{ items }}</option>
     </select>
   </div>
   <div class="col-6">
-    <app-pagination [currentPage]="currentPage" 
-    [itemsPerPageValue]="itemsPerPage"  
-    [totalItems]="products?.length"
-    (pageChange)="onPageChange($event)">
+    <app-pagination [currentPage]="currentPage" [itemsPerPageValue]="itemsPerPage" [totalItems]="products?.length"
+      (pageChange)="onPageChange($event)">
     </app-pagination>
   </div>
 </div>
-
-
-
