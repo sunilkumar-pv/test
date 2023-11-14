@@ -18,15 +18,81 @@
   }
 }
 
+.table-container {
+  width: 800px;
+  overflow-x: auto; /* Add a horizontal scrollbar if needed */
+}
  
-// tr{
-//   th:nth-child(n+3) {
-//     background-color: lightgray;
-//     /* Add any other styles you want to apply to even th elements */
-//     scroll-behavior: smooth;
-//     overflow-x: scroll;
-//   }
-// }
+
+.sticky-column {
+  position: sticky;
+  left: 0; /* Adjust this value based on your layout */
+  background-color: #ffffff; /* Background color when sticky */
+  z-index: 2; /* Adjust this value based on your layout */
+  box-shadow: 0px 10px 0px 0px grey;
+} 
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  cursor: pointer;
+  background-color: #efebeb;
+}
+
+
+table tr:nth-child(even) {
+  background-color: #efefef;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.pagination button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.items-per-page {
+  margin-bottom: 10px;
+}
+
+.items-per-page label {
+  margin-right: 5px;
+}
+
+
+.search {
+  margin-bottom: 20px;
+}
+
+.search input {
+  padding: 5px;
+  width: 98%;
+}
+
+.search-result {
+  text-align: center;
+  color: red;
+}
+
+
+ 
 
 // th:not(:first-child):nth-child(n+3) {
 //   background-color: lightgray;

@@ -19,8 +19,10 @@ export class SuperTableComponent implements OnInit{
   currentPage: number = 1;
   itemsPerPage: number = 4;
   selectedItemsPerPage: number[] = [4, 8, 12]; // Add this line
-selectedItemsPerPageValue: number = 4; // Add this line
+  selectedItemsPerPageValue: number = 4; // Add this line
 
+   searchText: string = ''; // Search input text
+ 
 
   constructor(private dataService: DataService){
     this.dataService.getAllTableData().subscribe((res: any)=> {
@@ -39,6 +41,8 @@ selectedItemsPerPageValue: number = 4; // Add this line
   }
   
   
+
+
   doSort(event: any) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     // Now you have the selected value, extract the necessary information and perform the sorting
@@ -82,6 +86,8 @@ selectedItemsPerPageValue: number = 4; // Add this line
     this.columnVisibility[i] = !this.columnVisibility[i];
   } 
 
+
+
  
   onPageChange(newPage: number) {
     this.currentPage = newPage;
@@ -90,6 +96,10 @@ selectedItemsPerPageValue: number = 4; // Add this line
     this.itemsPerPage = newItemsPerPage;
     this.currentPage = 1; // Reset to the first page when changing items per page
   }
+
+
+
+  
 }
 
 
