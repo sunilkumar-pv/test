@@ -18,6 +18,10 @@ export class SuperTableComponent implements OnInit{
  
   currentPage: number = 1;
   itemsPerPage: number = 4;
+  selectedItemsPerPage: number[] = [4, 8, 12]; // Add this line
+selectedItemsPerPageValue: number = 4; // Add this line
+
+
   constructor(private dataService: DataService){
     this.dataService.getAllTableData().subscribe((res: any)=> {
       console.log(res);
@@ -30,8 +34,10 @@ export class SuperTableComponent implements OnInit{
     }); 
   }
   
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.itemsPerPage = this.selectedItemsPerPageValue;
   }
+  
   
   doSort(event: any) {
     const selectedValue = (event.target as HTMLSelectElement).value;
@@ -80,7 +86,10 @@ export class SuperTableComponent implements OnInit{
   onPageChange(newPage: number) {
     this.currentPage = newPage;
   }
-  
+  onItemsPerPageChange(newItemsPerPage: number) {
+    this.itemsPerPage = newItemsPerPage;
+    this.currentPage = 1; // Reset to the first page when changing items per page
+  }
 }
 
 

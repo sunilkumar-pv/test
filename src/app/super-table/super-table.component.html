@@ -14,16 +14,16 @@
 <table border="1.0">
   <thead style="background-color: azure;">
     <tr>
-      <th>Sl No</th>
-      <th *ngIf="columnVisibility[0]">Product Code</th>
-      <th *ngIf="columnVisibility[1]">Product Name 
+      <th>Sl <br> No</th>
+      <th *ngIf="columnVisibility[0]">Product <br> Code</th>
+      <th *ngIf="columnVisibility[1]">Product <br> Name  <br>
         <select name="" id="" (change)="doSort($event)">
           <option value="" disabled selected>Select</option>
           <option value="productName">Product Name - Asc</option>
           <option value="productName-desc">Product Name - Desc</option>
         </select>
       </th>
-      <th>Serial Number</th>
+      <th>Serial <br> Number</th>
       <th>Category</th>
       <th>Description</th>
       <th>Brand</th>
@@ -70,9 +70,16 @@
     </tr>
   </tbody>
 </table>
-
+<br>
+<label for="itemsPerPage">Items Per Page</label>
+<select class="" name="" id="itemsPerPage" [(ngModel)]="selectedItemsPerPageValue" (change)="onItemsPerPageChange(selectedItemsPerPageValue)">
+  <option *ngFor="let items of selectedItemsPerPage" [value]="items">{{ items }}</option>
+</select>
 <app-pagination [currentPage]="currentPage" 
-[itemsPerPage]="itemsPerPage" 
-[totalItems]="products?.length"
-(pageChange)="onPageChange($event)">
+                [itemsPerPageValue]="itemsPerPage"  
+                [totalItems]="products?.length"
+                (pageChange)="onPageChange($event)">
 </app-pagination>
+
+
+
